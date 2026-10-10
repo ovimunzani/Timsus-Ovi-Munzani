@@ -1,0 +1,10 @@
+{
+  "name": "TIMSUS OVI MUNZANI",
+  "short_name": "TIMSUS",
+  "description": "Dashboard Tim Sukses Kades Ovi Munzani - Desa Karangdawa",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#22c55e",
+  "orientation": "portrait"
+}

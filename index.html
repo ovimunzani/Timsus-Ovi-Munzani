@@ -1,0 +1,1403 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#22c55e">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="TIMSUS OVI">
+<title>TIMSUS OVI MUNZANI</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" type="image/svg+xml" href="/icons/favicon.svg">
+<link rel="apple-touch-icon" href="/icons/icon-192.png">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+:root {
+  --primary: #22c55e;
+  --primary-dark: #16a34a;
+  --primary-light: #dcfce7;
+  --secondary: #3b82f6;
+  --secondary-dark: #2563eb;
+  --secondary-light: #dbeafe;
+  --danger: #ef4444;
+  --warning: #eab308;
+  --info: #3b82f6;
+  --gray: #94a3b8;
+  --bg: #f8fafc;
+  --card: #ffffff;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --border: #e2e8f0;
+  --radius: 12px;
+  --shadow: 0 1px 3px rgba(0,0,0,0.08);
+  --shadow-lg: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  overscroll-behavior-y: none;
+}
+
+#app { min-height: 100vh; }
+
+/* ============ LOGIN ============ */
+.login-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: linear-gradient(135deg, #22c55e 0%, #3b82f6 100%);
+}
+
+.login-card {
+  background: white;
+  border-radius: 20px;
+  padding: 32px 24px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+}
+
+.login-logo {
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 16px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #22c55e, #3b82f6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 800;
+  font-size: 24px;
+  letter-spacing: -1px;
+  box-shadow: 0 8px 20px rgba(34,197,94,0.3);
+}
+
+.login-card h1 {
+  font-size: 18px;
+  font-weight: 700;
+  text-align: center;
+  letter-spacing: 0.5px;
+}
+
+.login-card .subtitle {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 12px;
+  margin-bottom: 24px;
+}
+
+/* ============ FORM ============ */
+.form-group { margin-bottom: 14px; }
+
+.form-group label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: var(--text);
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  font-size: 14px;
+  font-family: inherit;
+  transition: all 0.2s;
+  background: white;
+  color: var(--text);
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-light);
+}
+
+.form-group textarea { resize: vertical; min-height: 80px; }
+
+/* ============ BUTTON ============ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: inherit;
+  white-space: nowrap;
+}
+
+.btn:active { transform: scale(0.97); }
+
+.btn-primary {
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  color: white;
+  width: 100%;
+  box-shadow: 0 4px 12px rgba(34,197,94,0.3);
+}
+
+.btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.btn-secondary { background: var(--border); color: var(--text); }
+
+.btn-danger { background: var(--danger); color: white; }
+
+.btn-info { background: var(--secondary); color: white; }
+
+.btn-sm { padding: 6px 12px; font-size: 12px; border-radius: 8px; }
+
+.btn-block { width: 100%; }
+
+/* ============ HEADER ============ */
+.header {
+  background: linear-gradient(135deg, #22c55e 0%, #3b82f6 100%);
+  color: white;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.header h2 {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.header .user-info {
+  font-size: 11px;
+  opacity: 0.9;
+  margin-top: 2px;
+}
+
+.header .btn-logout {
+  background: rgba(255,255,255,0.2);
+  color: white;
+  border: 1px solid rgba(255,255,255,0.3);
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+}
+
+/* ============ BOTTOM NAV ============ */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: white;
+  border-top: 1px solid var(--border);
+  display: flex;
+  z-index: 100;
+  padding-bottom: env(safe-area-inset-bottom);
+  box-shadow: 0 -2px 8px rgba(0,0,0,0.05);
+}
+
+.bottom-nav button {
+  flex: 1;
+  padding: 10px 4px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--text-muted);
+  transition: color 0.2s;
+  font-family: inherit;
+}
+
+.bottom-nav button.active { color: var(--primary); }
+
+.bottom-nav button .icon {
+  font-size: 20px;
+  line-height: 1;
+}
+
+/* ============ CONTENT ============ */
+.content {
+  padding: 16px;
+  padding-bottom: 90px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* ============ CARD ============ */
+.card {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-bottom: 12px;
+  box-shadow: var(--shadow);
+}
+
+.card h3 {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ============ STATS ============ */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.stat-card {
+  background: white;
+  border-radius: var(--radius);
+  padding: 14px;
+  box-shadow: var(--shadow);
+  border-left: 4px solid var(--primary);
+}
+
+.stat-card.blue { border-left-color: var(--secondary); }
+.stat-card.yellow { border-left-color: var(--warning); }
+.stat-card.red { border-left-color: var(--danger); }
+
+.stat-card .label {
+  font-size: 10px;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+}
+
+.stat-card .value {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1.1;
+}
+
+.stat-card .sub {
+  font-size: 10px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+/* ============ TABLE ============ */
+.table-wrapper {
+  overflow-x: auto;
+  margin: 0 -16px;
+  padding: 0 16px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+th, td {
+  padding: 10px 8px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+
+th {
+  background: var(--bg);
+  font-weight: 700;
+  font-size: 10px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+tr:last-child td { border-bottom: none; }
+
+/* ============ BADGE ============ */
+.badge {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.badge-success { background: #dcfce7; color: #166534; }
+.badge-warning { background: #fef3c7; color: #854d0e; }
+.badge-danger { background: #fee2e2; color: #991b1b; }
+.badge-info { background: #dbeafe; color: #1e40af; }
+.badge-gray { background: #f1f5f9; color: #475569; }
+
+/* ============ PROGRESS ============ */
+.progress-bar {
+  height: 8px;
+  background: var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-top: 4px;
+}
+
+.progress-bar .fill {
+  height: 100%;
+  background: linear-gradient(90deg, #22c55e, #3b82f6);
+  border-radius: 4px;
+  transition: width 0.3s;
+}
+
+.progress-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.progress-row:last-child { border-bottom: none; }
+
+.progress-row .label {
+  font-size: 12px;
+  font-weight: 600;
+  min-width: 60px;
+}
+
+.progress-row .bar-wrapper { flex: 1; }
+
+.progress-row .value {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  min-width: 50px;
+  text-align: right;
+}
+
+/* ============ MODAL ============ */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  display: none;
+  align-items: flex-end;
+  justify-content: center;
+  z-index: 200;
+  backdrop-filter: blur(4px);
+}
+
+.modal-overlay.active { display: flex; }
+
+.modal {
+  background: white;
+  border-radius: 20px 20px 0 0;
+  padding: 20px;
+  width: 100%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+  animation: slideUp 0.3s;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+.modal h3 {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal .close-btn {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: var(--text-muted);
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.modal-actions .btn { flex: 1; }
+
+/* ============ TOAST ============ */
+.toast {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-100px);
+  background: var(--text);
+  color: white;
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 500;
+  z-index: 300;
+  transition: transform 0.3s;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  max-width: 90%;
+  text-align: center;
+}
+
+.toast.active { transform: translateX(-50%) translateY(0); }
+.toast.success { background: var(--primary); }
+.toast.error { background: var(--danger); }
+.toast.info { background: var(--secondary); }
+
+/* ============ LOADING ============ */
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+}
+
+.spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid var(--border);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ============ EMPTY ============ */
+.empty {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+.empty .icon {
+  font-size: 40px;
+  margin-bottom: 8px;
+  opacity: 0.5;
+}
+
+/* ============ FILTER BAR ============ */
+.filter-bar {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.filter-bar select,
+.filter-bar input {
+  padding: 8px 12px;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  font-size: 12px;
+  font-family: inherit;
+  background: white;
+  color: var(--text);
+  flex-shrink: 0;
+}
+
+.filter-bar input { flex: 1; min-width: 120px; }
+
+/* ============ RESPONSIVE ============ */
+@media (min-width: 768px) {
+  .stats-grid { grid-template-columns: repeat(4, 1fr); }
+  .modal-overlay { align-items: center; }
+  .modal { border-radius: 20px; }
+}
+</style>
+</head>
+<body>
+
+<div id="app"></div>
+<div id="modal" class="modal-overlay"></div>
+<div id="toast" class="toast"></div>
+
+<script>
+// ============================================
+// CONFIG
+// ============================================
+const CONFIG = {
+  SUPABASE_URL: 'https://<project-ref>.supabase.co',
+  SUPABASE_ANON_KEY: '<anon-key>',
+};
+
+// ============================================
+// STATE
+// ============================================
+const state = {
+  token: localStorage.getItem('token') || null,
+  user: JSON.parse(localStorage.getItem('user') || 'null'),
+  currentPage: 'dashboard',
+  cache: {},
+};
+
+// ============================================
+// API
+// ============================================
+async function api(endpoint, options = {}) {
+  const url = `${CONFIG.SUPABASE_URL}/functions/v1/${endpoint}`;
+  const headers = {
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${CONFIG.SUPABASE_ANON_KEY}`,
+    ...(state.token ? { 'x-user-token': state.token } : {}),
+    ...(options.headers || {}),
+  };
+
+  const res = await fetch(url, { ...options, headers });
+  
+  let data;
+  try {
+    data = await res.json();
+  } catch {
+    throw new Error('Response tidak valid');
+  }
+
+  if (!res.ok) {
+    if (res.status === 401) {
+      // Token expired → logout
+      state.token = null;
+      state.user = null;
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      render();
+    }
+    throw new Error(data.error || 'Terjadi kesalahan');
+  }
+
+  return data;
+}
+
+// ============================================
+// TOAST
+// ============================================
+function toast(message, type = 'success') {
+  const el = document.getElementById('toast');
+  el.textContent = message;
+  el.className = `toast ${type} active`;
+  clearTimeout(el._timeout);
+  el._timeout = setTimeout(() => el.className = `toast ${type}`, 3000);
+}
+
+// ============================================
+// MODAL
+// ============================================
+function openModal(html) {
+  const modal = document.getElementById('modal');
+  modal.innerHTML = `<div class="modal">${html}</div>`;
+  modal.classList.add('active');
+  modal.onclick = (e) => { if (e.target === modal) closeModal(); };
+}
+
+function closeModal() {
+  document.getElementById('modal').classList.remove('active');
+}
+
+// ============================================
+// ROUTER
+// ============================================
+function navigate(page) {
+  state.currentPage = page;
+  render();
+  window.scrollTo(0, 0);
+}
+
+// ============================================
+// RENDER
+// ============================================
+function render() {
+  const app = document.getElementById('app');
+  
+  if (!state.token || !state.user) {
+    app.innerHTML = renderLogin();
+    return;
+  }
+
+  app.innerHTML = `
+    ${renderHeader()}
+    <div id="page-content"></div>
+    ${renderBottomNav()}
+  `;
+
+  const content = document.getElementById('page-content');
+  
+  try {
+    if (state.currentPage === 'dashboard') content.innerHTML = renderDashboard();
+    else if (state.currentPage === 'pemilih') content.innerHTML = renderPemilih();
+    else if (state.currentPage === 'anggota') content.innerHTML = renderAnggota();
+    else if (state.currentPage === 'aktivitas') content.innerHTML = renderAktivitas();
+    
+    // Panggil loader setelah render
+    if (state.currentPage === 'dashboard') loadDashboard();
+    else if (state.currentPage === 'pemilih') loadPemilih();
+    else if (state.currentPage === 'anggota') loadAnggota();
+    else if (state.currentPage === 'aktivitas') loadAktivitas();
+  } catch (err) {
+    content.innerHTML = `<div class="empty">Error: ${err.message}</div>`;
+  }
+}
+
+// ============================================
+// RENDER: LOGIN
+// ============================================
+function renderLogin() {
+  return `
+    <div class="login-container">
+      <div class="login-card">
+        <div class="login-logo">T</div>
+        <h1>TIMSUS OVI MUNZANI</h1>
+        <p class="subtitle">Desa Karangdawa, Kec. Margasari</p>
+        
+        <form id="login-form">
+          <div class="form-group">
+            <label>Nama</label>
+            <input type="text" id="login-nama" placeholder="Masukkan nama Anda" required autocomplete="off">
+          </div>
+          
+          <div class="form-group">
+            <label>Kode Akses</label>
+            <input type="text" id="login-kode" placeholder="Contoh: KORT-01-01" required autocomplete="off" style="text-transform:uppercase;">
+          </div>
+          
+          <button type="submit" class="btn btn-primary" id="login-btn">Masuk</button>
+        </form>
+        
+        <p style="text-align:center;font-size:11px;color:var(--text-muted);margin-top:16px;">
+          Belum punya akses? Hubungi koordinator Anda.
+        </p>
+      </div>
+    </div>
+  `;
+}
+
+// ============================================
+// HANDLER: LOGIN
+// ============================================
+document.addEventListener('submit', async (e) => {
+  if (e.target.id !== 'login-form') return;
+  e.preventDefault();
+
+  const nama = document.getElementById('login-nama').value.trim();
+  const kode = document.getElementById('login-kode').value.trim().toUpperCase();
+  const btn = document.getElementById('login-btn');
+
+  if (!nama || !kode) {
+    toast('Nama dan kode akses wajib diisi', 'error');
+    return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = 'Memproses...';
+
+  try {
+    const res = await api('auth-login', {
+      method: 'POST',
+      body: JSON.stringify({ nama, kode_akses: kode })
+    });
+
+    state.token = res.token;
+    state.user = res.user;
+    localStorage.setItem('token', res.token);
+    localStorage.setItem('user', JSON.stringify(res.user));
+
+    toast(`Selamat datang, ${res.user.nama}!`, 'success');
+    state.currentPage = 'dashboard';
+    render();
+  } catch (err) {
+    toast(err.message || 'Login gagal', 'error');
+    btn.disabled = false;
+    btn.textContent = 'Masuk';
+  }
+});
+
+// ============================================
+// HANDLER: LOGOUT
+// ============================================
+async function handleLogout() {
+  if (!confirm('Yakin ingin keluar?')) return;
+  
+  try { await api('auth-logout', { method: 'POST' }); } catch {}
+
+  state.token = null;
+  state.user = null;
+  state.cache = {};
+  localStorage.removeItem('token');
+  localStorage.removeItem('user');
+  toast('Berhasil keluar', 'success');
+  render();
+}
+
+// ============================================
+// RENDER: HEADER
+// ============================================
+function renderHeader() {
+  const roleLabel = { kordes: 'Kordes', korduk: 'KorDuk', korrw: 'KorRW', kort: 'KoRT' };
+  const scope = state.user.role === 'kordes' ? 'Semua Wilayah'
+    : state.user.role === 'korduk' ? `Dukuh ${state.user.dukuh}`
+    : state.user.role === 'korrw' ? `RW ${state.user.rw}`
+    : `RW ${state.user.rw} / RT ${state.user.rt}`;
+
+  return `
+    <div class="header">
+      <div>
+        <h2>TIMSUS OVI MUNZANI</h2>
+        <div class="user-info">${state.user.nama} · ${roleLabel[state.user.role]} · ${scope}</div>
+      </div>
+      <button class="btn-logout" onclick="handleLogout()">Keluar</button>
+    </div>
+  `;
+}
+
+// ============================================
+// RENDER: BOTTOM NAV
+// ============================================
+function renderBottomNav() {
+  const menus = [
+    { id: 'dashboard', label: 'Home', icon: '🏠' },
+    { id: 'pemilih', label: 'Pemilih', icon: '👥' },
+    { id: 'anggota', label: 'Anggota', icon: '🧑‍🤝‍🧑', roles: ['kordes', 'korduk', 'korrw'] },
+    { id: 'aktivitas', label: 'Log', icon: '📋', roles: ['kordes', 'korduk'] },
+  ];
+
+  return `
+    <div class="bottom-nav">
+      ${menus
+        .filter(m => !m.roles || m.roles.includes(state.user.role))
+        .map(m => `
+          <button class="${state.currentPage === m.id ? 'active' : ''}" onclick="navigate('${m.id}')">
+            <span class="icon">${m.icon}</span>
+            <span>${m.label}</span>
+          </button>
+        `).join('')}
+    </div>
+  `;
+}
+
+// ============================================
+// PAGE: DASHBOARD
+// ============================================
+function renderDashboard() {
+  return `
+    <div class="content">
+      <div id="dash-stats" class="stats-grid">
+        <div class="stat-card"><div class="label">Memuat</div><div class="value">...</div></div>
+      </div>
+      <div id="dash-progress" class="card">
+        <div class="loading"><div class="spinner"></div></div>
+      </div>
+      <div id="dash-recent" class="card">
+        <div class="loading"><div class="spinner"></div></div>
+      </div>
+    </div>
+  `;
+}
+
+async function loadDashboard() {
+  try {
+    const { data } = await api('pemilih-list');
+    const pemilih = data || [];
+    
+    // Hitung statistik
+    const total = pemilih.length;
+    const k1 = pemilih.filter(p => p.status_dukungan === 'K1').length;
+    const k2 = pemilih.filter(p => p.status_dukungan === 'K2').length;
+    const undecided = pemilih.filter(p => p.status_dukungan === 'undecided').length;
+    const lawan = pemilih.filter(p => p.status_dukungan === 'lawan').length;
+    
+    // Hitung per RW
+    const perRW = {};
+    pemilih.forEach(p => {
+      if (!perRW[p.rw]) perRW[p.rw] = 0;
+      perRW[p.rw]++;
+    });
+    
+    const rwList = ['01','02','03','04','05','06','07','08','09','10'];
+    const targetPerRW = 480; // 4800/10
+    
+    document.getElementById('dash-stats').innerHTML = `
+      <div class="stat-card">
+        <div class="label">Total Data</div>
+        <div class="value">${total}</div>
+        <div class="sub">dari 4.800 target</div>
+      </div>
+      <div class="stat-card blue">
+        <div class="label">K1 (Solid)</div>
+        <div class="value">${k1}</div>
+        <div class="sub">${total ? Math.round(k1/total*100) : 0}%</div>
+      </div>
+      <div class="stat-card yellow">
+        <div class="label">K2 (Simpatisan)</div>
+        <div class="value">${k2}</div>
+        <div class="sub">${total ? Math.round(k2/total*100) : 0}%</div>
+      </div>
+      <div class="stat-card red">
+        <div class="label">Undecided</div>
+        <div class="value">${undecided}</div>
+        <div class="sub">${total ? Math.round(undecided/total*100) : 0}%</div>
+      </div>
+    `;
+    
+    document.getElementById('dash-progress').innerHTML = `
+      <h3>📊 Progress per RW</h3>
+      ${rwList.map(rw => {
+        const count = perRW[rw] || 0;
+        const pct = Math.min(100, Math.round(count / targetPerRW * 100));
+        return `
+          <div class="progress-row">
+            <div class="label">RW ${rw}</div>
+            <div class="bar-wrapper">
+              <div class="progress-bar"><div class="fill" style="width:${pct}%"></div></div>
+            </div>
+            <div class="value">${count}</div>
+          </div>
+        `;
+      }).join('')}
+    `;
+    
+    // Recent
+    const recent = pemilih.slice(0, 5);
+    document.getElementById('dash-recent').innerHTML = `
+      <h3>🕐 Data Terbaru</h3>
+      ${recent.length ? recent.map(p => `
+        <div class="progress-row">
+          <div style="flex:1;">
+            <div style="font-size:13px;font-weight:600;">${p.nama}</div>
+            <div style="font-size:11px;color:var(--text-muted);">RW ${p.rw} / RT ${p.rt} · ${p.status_dukungan || '-'}</div>
+          </div>
+        </div>
+      `).join('') : '<div class="empty"><div class="icon">📭</div>Belum ada data</div>'}
+    `;
+    
+  } catch (err) {
+    document.getElementById('dash-progress').innerHTML = `<div class="empty">Error: ${err.message}</div>`;
+    document.getElementById('dash-recent').innerHTML = '';
+  }
+}
+
+// ============================================
+// PAGE: PEMILIH
+// ============================================
+function renderPemilih() {
+  const canInput = state.user.role === 'kort';
+  return `
+    <div class="content">
+      <div class="filter-bar">
+        <input type="text" id="filter-cari" placeholder="🔍 Cari nama/NIK..." oninput="filterPemilih()">
+        <select id="filter-status" onchange="filterPemilih()">
+          <option value="">Semua Status</option>
+          <option value="K1">K1 - Solid</option>
+          <option value="K2">K2 - Simpatisan</option>
+          <option value="undecided">Undecided</option>
+          <option value="lawan">Lawan</option>
+        </select>
+      </div>
+      
+      ${canInput ? `
+        <button class="btn btn-primary" onclick="openFormPemilih()" style="margin-bottom:12px;">
+          + Input Data Pemilih
+        </button>
+      ` : ''}
+      
+      <div class="card" style="padding:0;">
+        <div id="pemilih-list">
+          <div class="loading"><div class="spinner"></div></div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+async function loadPemilih() {
+  try {
+    const { data } = await api('pemilih-list');
+    state.cache.pemilih = data || [];
+    renderPemilihList();
+  } catch (err) {
+    document.getElementById('pemilih-list').innerHTML = `<div class="empty">Error: ${err.message}</div>`;
+  }
+}
+
+function renderPemilihList() {
+  const list = state.cache.pemilih || [];
+  const cari = (document.getElementById('filter-cari')?.value || '').toLowerCase();
+  const status = document.getElementById('filter-status')?.value || '';
+  
+  const filtered = list.filter(p => {
+    const matchCari = !cari || p.nama.toLowerCase().includes(cari) || p.nik.includes(cari);
+    const matchStatus = !status || p.status_dukungan === status;
+    return matchCari && matchStatus;
+  });
+  
+  if (!filtered.length) {
+    document.getElementById('pemilih-list').innerHTML = `
+      <div class="empty"><div class="icon">📭</div>Belum ada data</div>
+    `;
+    return;
+  }
+  
+  const canEdit = ['kordes', 'korduk', 'korrw', 'kort'].includes(state.user.role);
+  const canDelete = ['kordes', 'korrw'].includes(state.user.role);
+  
+  const badgeClass = { K1: 'success', K2: 'info', undecided: 'warning', lawan: 'danger' };
+  
+  document.getElementById('pemilih-list').innerHTML = `
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Nama</th>
+            <th>RW/RT</th>
+            <th>Status</th>
+            <th>Aksi</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${filtered.map(p => `
+            <tr>
+              <td>
+                <div style="font-weight:600;">${p.nama}</div>
+                <div style="font-size:10px;color:var(--text-muted);">${p.nik}</div>
+              </td>
+              <td>${p.rw}/${p.rt}</td>
+              <td><span class="badge badge-${badgeClass[p.status_dukungan] || 'gray'}">${p.status_dukungan || '-'}</span></td>
+              <td>
+                ${canEdit ? `<button class="btn btn-secondary btn-sm" onclick="openFormPemilih('${p.id}')">Edit</button>` : ''}
+                ${canDelete ? `<button class="btn btn-danger btn-sm" onclick="hapusPemilih('${p.id}','${p.nama}')">Hapus</button>` : ''}
+              </td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+    </div>
+  `;
+}
+
+function filterPemilih() { renderPemilihList(); }
+
+function openFormPemilih(id = null) {
+  const data = id ? state.cache.pemilih.find(p => p.id === id) : null;
+  
+  openModal(`
+    <h3>${id ? 'Edit' : 'Input'} Data Pemilih <button class="close-btn" onclick="closeModal()">×</button></h3>
+    <form id="form-pemilih">
+      <input type="hidden" id="fp-id" value="${id || ''}">
+      
+      <div class="form-group">
+        <label>NIK</label>
+        <input type="text" id="fp-nik" value="${data?.nik || ''}" required ${id ? 'readonly' : ''}>
+      </div>
+      
+      <div class="form-group">
+        <label>Nama Lengkap</label>
+        <input type="text" id="fp-nama" value="${data?.nama || ''}" required>
+      </div>
+      
+      <div class="form-group">
+        <label>Usia</label>
+        <input type="number" id="fp-usia" value="${data?.usia || ''}" min="17" max="120">
+      </div>
+      
+      <div class="form-group">
+        <label>Jenis Kelamin</label>
+        <select id="fp-jk">
+          <option value="">- Pilih -</option>
+          <option value="L" ${data?.jenis_kelamin === 'L' ? 'selected' : ''}>Laki-laki</option>
+          <option value="P" ${data?.jenis_kelamin === 'P' ? 'selected' : ''}>Perempuan</option>
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <label>Alamat</label>
+        <textarea id="fp-alamat">${data?.alamat || ''}</textarea>
+      </div>
+      
+      <div class="form-group">
+        <label>Status Dukungan</label>
+        <select id="fp-status" required>
+          <option value="">- Pilih -</option>
+          <option value="K1" ${data?.status_dukungan === 'K1' ? 'selected' : ''}>K1 - Solid</option>
+          <option value="K2" ${data?.status_dukungan === 'K2' ? 'selected' : ''}>K2 - Simpatisan</option>
+          <option value="undecided" ${data?.status_dukungan === 'undecided' ? 'selected' : ''}>Undecided</option>
+          <option value="lawan" ${data?.status_dukungan === 'lawan' ? 'selected' : ''}>Lawan</option>
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <label>Catatan</label>
+        <textarea id="fp-catatan">${data?.catatan || ''}</textarea>
+      </div>
+      
+      <div class="modal-actions">
+        <button type="button" class="btn btn-secondary" onclick="closeModal()">Batal</button>
+        <button type="submit" class="btn btn-primary">Simpan</button>
+      </div>
+    </form>
+  `);
+}
+
+document.addEventListener('submit', async (e) => {
+  if (e.target.id !== 'form-pemilih') return;
+  e.preventDefault();
+  
+  const id = document.getElementById('fp-id').value;
+  const body = {
+    nik: document.getElementById('fp-nik').value.trim(),
+    nama: document.getElementById('fp-nama').value.trim(),
+    usia: parseInt(document.getElementById('fp-usia').value) || null,
+    jenis_kelamin: document.getElementById('fp-jk').value || null,
+    alamat: document.getElementById('fp-alamat').value.trim(),
+    status_dukungan: document.getElementById('fp-status').value,
+    catatan: document.getElementById('fp-catatan').value.trim(),
+  };
+  
+  const btn = e.target.querySelector('button[type="submit"]');
+  btn.disabled = true;
+  btn.textContent = 'Menyimpan...';
+  
+  try {
+    if (id) {
+      await api('pemilih-update', { method: 'POST', body: JSON.stringify({ id, ...body }) });
+      toast('Data berhasil diupdate', 'success');
+    } else {
+      await api('pemilih-create', { method: 'POST', body: JSON.stringify(body) });
+      toast('Data berhasil disimpan', 'success');
+    }
+    closeModal();
+    loadPemilih();
+  } catch (err) {
+    toast(err.message || 'Gagal menyimpan', 'error');
+    btn.disabled = false;
+    btn.textContent = 'Simpan';
+  }
+});
+
+async function hapusPemilih(id, nama) {
+  if (!confirm(`Yakin hapus data "${nama}"?`)) return;
+  try {
+    await api('pemilih-delete', { method: 'POST', body: JSON.stringify({ id }) });
+    toast('Data berhasil dihapus', 'success');
+    loadPemilih();
+  } catch (err) {
+    toast(err.message || 'Gagal hapus', 'error');
+  }
+}
+
+// ============================================
+// PAGE: ANGGOTA
+// ============================================
+function renderAnggota() {
+  return `
+    <div class="content">
+      <button class="btn btn-primary" onclick="openFormAnggota()" style="margin-bottom:12px;">
+        + Tambah Anggota
+      </button>
+      <div class="card" style="padding:0;">
+        <div id="anggota-list">
+          <div class="loading"><div class="spinner"></div></div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+async function loadAnggota() {
+  try {
+    const { data } = await api('user-list');
+    state.cache.anggota = data || [];
+    renderAnggotaList();
+  } catch (err) {
+    document.getElementById('anggota-list').innerHTML = `<div class="empty">Error: ${err.message}</div>`;
+  }
+}
+
+function renderAnggotaList() {
+  const list = state.cache.anggota || [];
+  
+  if (!list.length) {
+    document.getElementById('anggota-list').innerHTML = `
+      <div class="empty"><div class="icon">👤</div>Belum ada anggota</div>
+    `;
+    return;
+  }
+  
+  const roleBadge = { kordes: 'success', korduk: 'info', korrw: 'warning', kort: 'gray' };
+  
+  document.getElementById('anggota-list').innerHTML = `
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Nama</th>
+            <th>Kode</th>
+            <th>Role</th>
+            <th>Scope</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${list.map(u => `
+            <tr>
+              <td style="font-weight:600;">${u.nama}</td>
+              <td style="font-size:10px;color:var(--text-muted);">${u.kode_akses}</td>
+              <td><span class="badge badge-${roleBadge[u.role]}">${u.role}</span></td>
+              <td style="font-size:11px;">${u.dukuh || ''} ${u.rw ? 'RW ' + u.rw : ''} ${u.rt ? '/ RT ' + u.rt : ''}</td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+    </div>
+  `;
+}
+
+function openFormAnggota() {
+  const role = state.user.role;
+  let roleOptions = [];
+  
+  if (role === 'kordes') {
+    roleOptions = [
+      { v: 'korduk', l: 'Koordinator Dukuh' },
+      { v: 'korrw', l: 'Koordinator RW' },
+      { v: 'kort', l: 'Koordinator RT' },
+    ];
+  } else if (role === 'korduk') {
+    roleOptions = [
+      { v: 'korrw', l: 'Koordinator RW' },
+      { v: 'kort', l: 'Koordinator RT' },
+    ];
+  } else if (role === 'korrw') {
+    roleOptions = [{ v: 'kort', l: 'Koordinator RT' }];
+  }
+  
+  openModal(`
+    <h3>Tambah Anggota <button class="close-btn" onclick="closeModal()">×</button></h3>
+    <form id="form-anggota">
+      <div class="form-group">
+        <label>Nama</label>
+        <input type="text" id="fa-nama" required>
+      </div>
+      
+      <div class="form-group">
+        <label>No HP</label>
+        <input type="text" id="fa-hp" placeholder="08xxx">
+      </div>
+      
+      <div class="form-group">
+        <label>Role</label>
+        <select id="fa-role" required onchange="updateFormAnggota()">
+          <option value="">- Pilih -</option>
+          ${roleOptions.map(r => `<option value="${r.v}">${r.l}</option>`).join('')}
+        </select>
+      </div>
+      
+      <div id="fa-extra"></div>
+      
+      <div class="modal-actions">
+        <button type="button" class="btn btn-secondary" onclick="closeModal()">Batal</button>
+        <button type="submit" class="btn btn-primary">Simpan</button>
+      </div>
+    </form>
+  `);
+}
+
+function updateFormAnggota() {
+  const role = document.getElementById('fa-role').value;
+  const extra = document.getElementById('fa-extra');
+  const userRole = state.user.role;
+  
+  let html = '';
+  
+  if (role === 'korduk') {
+    html = `
+      <div class="form-group">
+        <label>Dukuh</label>
+        <select id="fa-dukuh" required>
+          <option value="">- Pilih -</option>
+          <option value="Limbangan">Limbangan</option>
+          <option value="Apo">Apo</option>
+          <option value="Kedawung">Kedawung</option>
+          <option value="Karangasem">Karangasem</option>
+        </select>
+      </div>
+    `;
+  } else if (role === 'korrw') {
+    html = `
+      <div class="form-group">
+        <label>Dukuh</label>
+        <select id="fa-dukuh" required>
+          <option value="">- Pilih -</option>
+          <option value="Limbangan">Limbangan</option>
+          <option value="Apo">Apo</option>
+          <option value="Kedawung">Kedawung</option>
+          <option value="Karangasem">Karangasem</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>RW</label>
+        <select id="fa-rw" required>
+          <option value="">- Pilih -</option>
+          ${['01','02','03','04','05','06','07','08','09','10'].map(rw => `<option value="${rw}">RW ${rw}</option>`).join('')}
+        </select>
+      </div>
+    `;
+  } else if (role === 'kort') {
+    html = `
+      <div class="form-group">
+        <label>RW</label>
+        <select id="fa-rw" required>
+          <option value="">- Pilih -</option>
+          ${['01','02','03','04','05','06','07','08','09','10'].map(rw => `<option value="${rw}">RW ${rw}</option>`).join('')}
+        </select>
+      </div>
+      <div class="form-group">
+        <label>RT</label>
+        <input type="text" id="fa-rt" placeholder="Contoh: 01" required>
+      </div>
+    `;
+  }
+  
+  extra.innerHTML = html;
+}
+
+document.addEventListener('submit', async (e) => {
+  if (e.target.id !== 'form-anggota') return;
+  e.preventDefault();
+  
+  const body = {
+    nama: document.getElementById('fa-nama').value.trim(),
+    no_hp: document.getElementById('fa-hp').value.trim(),
+    role: document.getElementById('fa-role').value,
+    dukuh: document.getElementById('fa-dukuh')?.value || null,
+    rw: document.getElementById('fa-rw')?.value || null,
+    rt: document.getElementById('fa-rt')?.value || null,
+  };
+  
+  const btn = e.target.querySelector('button[type="submit"]');
+  btn.disabled = true;
+  btn.textContent = 'Menyimpan...';
+  
+  try {
+    const res = await api('user-create', { method: 'POST', body: JSON.stringify(body) });
+    toast(`Akun ${res.data.kode_akses} berhasil dibuat`, 'success');
+    closeModal();
+    loadAnggota();
+  } catch (err) {
+    toast(err.message || 'Gagal', 'error');
+    btn.disabled = false;
+    btn.textContent = 'Simpan';
+  }
+});
+
+// ============================================
+// PAGE: AKTIVITAS
+// ============================================
+function renderAktivitas() {
+  return `
+    <div class="content">
+      <div class="card" style="padding:0;">
+        <div id="aktivitas-list">
+          <div class="loading"><div class="spinner"></div></div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+async function loadAktivitas() {
+  try {
+    const { data } = await api('aktivitas-list');
+    const list = data || [];
+    
+    if (!list.length) {
+      document.getElementById('aktivitas-list').innerHTML = `
+        <div class="empty"><div class="icon">📋</div>Belum ada aktivitas</div>
+      `;
+      return;
+    }
+    
+    document.getElementById('aktivitas-list').innerHTML = `
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Waktu</th>
+              <th>User</th>
+              <th>Aksi</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${list.map(a => `
+              <tr>
+                <td style="font-size:11px;">${new Date(a.created_at).toLocaleString('id-ID', { dateStyle:'short', timeStyle:'short' })}</td>
+                <td style="font-weight:600;">${a.users?.nama || '-'}</td>
+                <td><span class="badge badge-gray">${a.aksi}</span></td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+      </div>
+    `;
+  } catch (err) {
+    document.getElementById('aktivitas-list').innerHTML = `<div class="empty">Error: ${err.message}</div>`;
+  }
+}
+
+// ============================================
+// INIT
+// ============================================
+function init() {
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js').catch(console.error);
+  }
+  render();
+}
+
+init();
+</script>
+</body>
+</html>
